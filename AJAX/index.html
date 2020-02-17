@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX_AXIOS_JSON-SERVER</title>
+</head>
+<body>
+    <ol id="students">
+        <li class="foo">take</li>
+        <li class="foo">make</li>
+        <li>go</li>
+    </ol>
+    <ul>
+        <li class="foo">take</li>
+        <li class="foo">make</li>
+        <li>go</li>
+    </ul>
+
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+        var url = 'http://localhost:9081/students';
+        render();
+
+        function delStudent (idStudent) {
+            axios({
+                method: 'delete',
+                url: url + '/' + idStudent,
+            }).then(function(res){
+                render();
+            });
+
+
+        }
+        function addStudents(data){
+            axios({
+                method: 'post',
+                url: url,
+                data: data
+            })
+            .then(function(res){
+                render();
+            });
+
+        }
+
+        function render () {
+            // body...
+            axios.get(url).then(function(res){
+            var items = res.data;
+            console.log('data loaded', items);
+            var htmlList = document.getElementById('students');
+            var content = items.map(function(item){
+                return '<li>' + item.name + '</li>'
+            });
+            htmlList.innerHTML = content.join('');
+            });
+
+        }
+
+    </script>
+</body>
+</html>

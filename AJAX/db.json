@@ -1,0 +1,19 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "nguyen bao hieu",
+      "age": 30
+    },
+    {
+      "id": 2,
+      "name": "nguyen van a",
+      "age": 29
+    },
+    {
+      "id": 3,
+      "name": "tran van b",
+      "age": 30
+    }
+  ]
+}
