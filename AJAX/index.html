@@ -5,35 +5,52 @@
     <title>AJAX_AXIOS_JSON-SERVER</title>
 </head>
 <body>
+    <span>Họ Tên</span>
+    <input type="text" id="student-name">
+    <span>Tuổi</span>
+    <input type="text" id="student-age">
+    <button id="add-student">Add</button>
+
     <ol id="students">
         <li class="foo">take</li>
         <li class="foo">make</li>
         <li>go</li>
     </ol>
-    <ul>
-        <li class="foo">take</li>
-        <li class="foo">make</li>
-        <li>go</li>
-    </ul>
+    <span>Nhập ID cần xóa</span>
+    <input type="text" id="id-student">
+    <button id="del-student">XÓA</button>
 
 
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
         var url = 'http://localhost:9081/students';
+        var nameInput = document.getElementById('student-name');
+        var ageInput = document.getElementById('student-age');
+        var idInput = document.getElementById('id-student')
+        var addBtn = document.getElementById('add-student');
+        var delBtm = document.getElementById('del-student');
+        addBtn.addEventListener('click', addStudent);
+        delBtm.addEventListener('click', delStudent);
         render();
 
-        function delStudent (idStudent) {
+        function delStudent () {
+
             axios({
                 method: 'delete',
-                url: url + '/' + idStudent,
+                url: url + '/' + parseInt(idInput.value),
             }).then(function(res){
                 render();
             });
 
 
         }
-        function addStudents(data){
+        function addStudent(){
+            var data = {
+                name: nameInput.value,
+                age: parseInt(ageInput.value)
+            };
+
             axios({
                 method: 'post',
                 url: url,
@@ -42,6 +59,8 @@
             .then(function(res){
                 render();
             });
+            nameInput.value = '';
+            ageInput.value = '';
 
         }
 
@@ -52,7 +71,7 @@
             console.log('data loaded', items);
             var htmlList = document.getElementById('students');
             var content = items.map(function(item){
-                return '<li>' + item.name + '</li>'
+                return '<li id="'+ item.id + '">' + item.name + ' ID: ' + item.id + '</li>'
             });
             htmlList.innerHTML = content.join('');
             });
