@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TODO LIST</title>
+</head>
+<body>
+	<ul id="todo-list">
+		<li class="foo">take</li>
+		<li class="foo">make</li>
+		<li>go</li>
+	</ul>
+	<ul>
+		<li class="foo">take</li>
+		<li class="foo">make</li>
+		<li>go</li>
+	</ul>
+	<script type="text/javascript">
+		var todoList = [
+			'Take',
+			'Make',
+			'Go'
+		];
+		var htmlList = document.getElementById('todo-list');
+		var content = todoList.map(function(item){
+			return '<li>' + item + '</li>'
+		});
+		console.log(content.join(''));
+
+		htmlList.innerHTML = content.join('');
+
+		var p = document.getElementsByTagName('li');
+		for(var item of p){
+			if(item.getAttribute('class')==='foo'){
+				item.innerHTML += '<a href="coders.tokyo">coders.tokyo</a>';
+			}
+			
+		}
+	</script>
+</body>
+</html>
